@@ -1,0 +1,55 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Setup: everything (run once)",
+      "type": "shell",
+      "command": "bash setup_mac_linux.sh",
+      "windows": { "command": ".\\setup_windows.bat" },
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    },
+    {
+      "label": "Check setup (offline, free)",
+      "type": "shell",
+      "command": ".venv/bin/python check_setup.py",
+      "windows": { "command": ".venv\\Scripts\\python.exe check_setup.py" },
+      "options": { "cwd": "${workspaceFolder}/brain", "env": { "PYTHONUTF8": "1" } },
+      "problemMatcher": []
+    },
+    {
+      "label": "Run: Brain Step 4 (auto-reload on save)",
+      "type": "shell",
+      "command": ".venv/bin/python -m uvicorn main_v4:app --reload --port 8000",
+      "windows": { "command": ".venv\\Scripts\\python.exe -m uvicorn main_v4:app --reload --port 8000" },
+      "options": { "cwd": "${workspaceFolder}/brain", "env": { "PYTHONUTF8": "1" } },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": { "panel": "dedicated", "group": "agent" }
+    },
+    {
+      "label": "Run: Bridge Step 3",
+      "type": "shell",
+      "command": "node 03_bridge_with_approval.js",
+      "options": { "cwd": "${workspaceFolder}/bridge" },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": { "panel": "dedicated", "group": "agent" }
+    },
+    {
+      "label": "Run: Step 4 (brain + bridge, side by side)",
+      "dependsOn": ["Run: Brain Step 4 (auto-reload on save)", "Run: Bridge Step 3"],
+      "dependsOrder": "parallel",
+      "problemMatcher": []
+    },
+    {
+      "label": "Reset WhatsApp login (rescan QR next time)",
+      "type": "shell",
+      "command": "rm -rf .wwebjs_auth .wwebjs_cache",
+      "windows": { "command": "if exist .wwebjs_auth rmdir /s /q .wwebjs_auth & if exist .wwebjs_cache rmdir /s /q .wwebjs_cache", "options": { "cwd": "${workspaceFolder}/bridge", "shell": { "executable": "cmd.exe", "args": ["/d", "/c"] } } },
+      "options": { "cwd": "${workspaceFolder}/bridge" },
+      "problemMatcher": []
+    }
+  ]
+}

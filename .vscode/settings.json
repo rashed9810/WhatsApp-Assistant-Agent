@@ -1,0 +1,23 @@
+{
+  "python.defaultInterpreterPath": "${workspaceFolder}/brain/.venv/Scripts/python.exe",
+  "python.analysis.extraPaths": ["${workspaceFolder}/brain"],
+  "python.terminal.activateEnvironment": true,
+  "python.envFile": "${workspaceFolder}/brain/.env",
+  "terminal.integrated.env.windows": { "PYTHONUTF8": "1" },
+  "terminal.integrated.env.osx": { "PYTHONUTF8": "1" },
+  "terminal.integrated.env.linux": { "PYTHONUTF8": "1" },
+  "files.encoding": "utf8",
+  "files.eol": "auto",
+  "files.exclude": {
+    "**/__pycache__": true,
+    "bridge/.wwebjs_cache": true
+  },
+  "search.exclude": {
+    "bridge/node_modules": true,
+    "brain/.venv": true,
+    "bridge/.wwebjs_auth": true,
+    "bridge/.wwebjs_cache": true
+  },
+  "[python]": { "editor.tabSize": 4 },
+  "[javascript]": { "editor.tabSize": 2 }
+}

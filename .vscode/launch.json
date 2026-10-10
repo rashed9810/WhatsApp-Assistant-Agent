@@ -1,0 +1,154 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Brain: Step 4 (AI drafts) - main_v4",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "uvicorn",
+      "args": ["main_v4:app", "--port", "8000"],
+      "cwd": "${workspaceFolder}/brain",
+      "python": "${workspaceFolder}/brain/.venv/bin/python",
+      "windows": { "python": "${workspaceFolder}/brain/.venv/Scripts/python.exe" },
+      "env": { "PYTHONUTF8": "1" },
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Brain: Step 3 (approval queue) - main_v3",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "uvicorn",
+      "args": ["main_v3:app", "--port", "8000"],
+      "cwd": "${workspaceFolder}/brain",
+      "python": "${workspaceFolder}/brain/.venv/bin/python",
+      "windows": { "python": "${workspaceFolder}/brain/.venv/Scripts/python.exe" },
+      "env": { "PYTHONUTF8": "1" },
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Brain: Step 2 (skeleton) - main",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "uvicorn",
+      "args": ["main:app", "--port", "8000"],
+      "cwd": "${workspaceFolder}/brain",
+      "python": "${workspaceFolder}/brain/.venv/bin/python",
+      "windows": { "python": "${workspaceFolder}/brain/.venv/Scripts/python.exe" },
+      "env": { "PYTHONUTF8": "1" },
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Bridge: Step 3 (with approval)",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/bridge/03_bridge_with_approval.js",
+      "cwd": "${workspaceFolder}/bridge",
+      "console": "integratedTerminal",
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "name": "Bridge: Step 2 (to brain)",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/bridge/02_bridge_to_brain.js",
+      "cwd": "${workspaceFolder}/bridge",
+      "console": "integratedTerminal",
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "name": "Bridge: Step 1 (echo bot)",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/bridge/01_echo_bot.js",
+      "cwd": "${workspaceFolder}/bridge",
+      "console": "integratedTerminal",
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "name": "Tool: check setup (offline, free)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/brain/check_setup.py",
+      "cwd": "${workspaceFolder}/brain",
+      "python": "${workspaceFolder}/brain/.venv/bin/python",
+      "windows": { "python": "${workspaceFolder}/brain/.venv/Scripts/python.exe" },
+      "env": { "PYTHONUTF8": "1" },
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Tool: check setup + one real OpenAI call",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/brain/check_setup.py",
+      "args": ["--live"],
+      "cwd": "${workspaceFolder}/brain",
+      "python": "${workspaceFolder}/brain/.venv/bin/python",
+      "windows": { "python": "${workspaceFolder}/brain/.venv/Scripts/python.exe" },
+      "env": { "PYTHONUTF8": "1" },
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Tool: import a WhatsApp chat export",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/brain/import_chat_export.py",
+      "args": ["${input:exportFile}", "--me", "${input:myName}", "--number", "${input:contactNumber}"],
+      "cwd": "${workspaceFolder}/brain",
+      "python": "${workspaceFolder}/brain/.venv/bin/python",
+      "windows": { "python": "${workspaceFolder}/brain/.venv/Scripts/python.exe" },
+      "env": { "PYTHONUTF8": "1" },
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Tool: list senders in a chat export",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/brain/import_chat_export.py",
+      "args": ["${input:exportFile}", "--list-senders"],
+      "cwd": "${workspaceFolder}/brain",
+      "python": "${workspaceFolder}/brain/.venv/bin/python",
+      "windows": { "python": "${workspaceFolder}/brain/.venv/Scripts/python.exe" },
+      "env": { "PYTHONUTF8": "1" },
+      "console": "integratedTerminal"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "RUN STEP 4: Brain (AI) + Bridge",
+      "configurations": ["Brain: Step 4 (AI drafts) - main_v4", "Bridge: Step 3 (with approval)"],
+      "stopAll": true
+    },
+    {
+      "name": "RUN STEP 3: Brain (queue) + Bridge",
+      "configurations": ["Brain: Step 3 (approval queue) - main_v3", "Bridge: Step 3 (with approval)"],
+      "stopAll": true
+    },
+    {
+      "name": "RUN STEP 2: Brain (skeleton) + Bridge",
+      "configurations": ["Brain: Step 2 (skeleton) - main", "Bridge: Step 2 (to brain)"],
+      "stopAll": true
+    }
+  ],
+  "inputs": [
+    {
+      "id": "exportFile",
+      "type": "promptString",
+      "description": "Path to the exported chat .txt (relative to the brain folder, e.g. exports/WhatsApp Chat with Rahim.txt)",
+      "default": "exports/"
+    },
+    {
+      "id": "myName",
+      "type": "promptString",
+      "description": "Your name exactly as it appears in the export",
+      "default": "Stanley"
+    },
+    {
+      "id": "contactNumber",
+      "type": "promptString",
+      "description": "The contact's number: country code, no + and no spaces (e.g. 8801712345678)"
+    }
+  ]
+}

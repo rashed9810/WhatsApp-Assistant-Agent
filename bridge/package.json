@@ -1,0 +1,17 @@
+{
+  "name": "whatsapp-agent-bridge",
+  "version": "0.1.0",
+  "description": "Ears and mouth of the WhatsApp assistant: reads and sends WhatsApp messages",
+  "private": true,
+  "scripts": {
+    "step1": "node 01_echo_bot.js",
+    "step2": "node 02_bridge_to_brain.js"
+  },
+  "dependencies": {
+    "qrcode-terminal": "^0.12.0",
+    "whatsapp-web.js": "^1.26.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

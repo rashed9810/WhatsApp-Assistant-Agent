@@ -1,0 +1,24 @@
+# --- Secrets: never upload these ---
+.env
+brain/.env
+
+# --- Private data: your chats and contacts ---
+brain/data/
+*.db
+WhatsApp Chat*.txt
+brain/exports/
+
+# --- WhatsApp login session (anyone with this folder can use your WhatsApp) ---
+bridge/.wwebjs_auth/
+bridge/.wwebjs_cache/
+
+# --- Installed packages (re-created by the setup script) ---
+bridge/node_modules/
+brain/.venv/
+.venv/
+
+# --- Python / OS clutter ---
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db

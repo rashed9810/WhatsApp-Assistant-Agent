@@ -1,0 +1,2 @@
+# Tools for testing only (used by check_setup.py). The agent itself doesn't need these.
+httpx>=0.27
